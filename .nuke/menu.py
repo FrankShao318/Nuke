@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # menu.py
-# Version: 1.0.1
-# Last Updated: Mar. 28, 2020
+# Version: 1.0.2
+# Last Updated: Mar. 29, 2020
 #----------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
@@ -40,6 +40,8 @@ nuke.knobDefault("Tracker4.shutteroffset", "centered")
 nuke.knobDefault("Tracker4.label", "Motion: [value transform]\nRef Frame: [value reference_frame]")
 nuke.addOnUserCreate(lambda:nuke.thisNode()["reference_frame"].setValue(nuke.frame()), nodeClass="Tracker4")
 
+nuke.addOnUserCreate(lambda:nuke.thisNode()["first_frame"].setValue(nuke.frame()), nodeClass="FrameHold")
+
 
 
 
@@ -51,8 +53,10 @@ frankMenu = nuke.menu("Nuke").addMenu("FrankMenu")
 frankMenu.addCommand("Autocrop", "nukescripts.autocrop()")
 
 
-frankGizmosMenu = nuke.menu("Nodes").addMenu("FrankGizmos", icon = dir + "/icons/frankGizmos.png")
+frankGizmosMenu = nuke.menu("Nodes").addMenu("FrankGizmos", icon = "frankGizmos.png")
 frankGizmosMenu.addCommand("Autocrop", "nukescripts.autocrop()")
+
+frankGizmosMenu.addCommand("bm_CameraShake", "nuke.createNode('bm_CameraShake')")
 
 
 #----------------------------------------------------------------------------
@@ -66,9 +70,6 @@ toolbar.addCommand("FrankTool/GradeTool", "nuke.createNode('GradeTool')")
 #----------------------------------------------------------------------------
 
 nuke.menu("Nodes").addCommand("Transform/Tracker", "nuke.createNode('Tracker4')", "ctrl+alt+t", icon = "Tracker.png", shortcutContext = 2)
-
-
-
 
 
 
