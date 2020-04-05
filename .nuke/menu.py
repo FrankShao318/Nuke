@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # menu.py
-# Version: 1.0.2
-# Last Updated: Mar. 29, 2020
+# Version: 1.0.3
+# Last Updated: Apr. 05, 2020
 #----------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
@@ -43,6 +43,22 @@ nuke.addOnUserCreate(lambda:nuke.thisNode()["reference_frame"].setValue(nuke.fra
 nuke.addOnUserCreate(lambda:nuke.thisNode()["first_frame"].setValue(nuke.frame()), nodeClass="FrameHold")
 
 
+#----------------------------------------------------------------------------
+# Merge Operations Preset :::::::::::::::::::::::::::::::::::::::::::::::::::
+#----------------------------------------------------------------------------
+
+mergeMenu = nuke.menu("Nodes").findItem("Merge/Merges")
+mergeMenu.addCommand("Stencil", "nuke.createNode('Merge2', 'operation stencil bbox B')", "alt+o", icon = "Out.png", shortcutContext = 2)
+mergeMenu.addCommand('Mask', 'nuke.createNode("Merge2", "operation mask bbox B")', 'alt+m', icon = 'Out.png', shortcutContext = 2)
+mergeMenu.addCommand('Plus', 'nuke.createNode("Merge2", "operation plus bbox B")', 'alt+p', icon = 'Out.png', shortcutContext = 2) 
+mergeMenu.addCommand('From', 'nuke.createNode("Merge2", "operation from bbox B")', 'alt+f', icon = 'Out.png', shortcutContext = 2)
+
+
+
+
+
+
+
 
 
 #----------------------------------------------------------------------------
@@ -70,6 +86,9 @@ toolbar.addCommand("FrankTool/GradeTool", "nuke.createNode('GradeTool')")
 #----------------------------------------------------------------------------
 
 nuke.menu("Nodes").addCommand("Transform/Tracker", "nuke.createNode('Tracker4')", "ctrl+alt+t", icon = "Tracker.png", shortcutContext = 2)
+
+
+
 
 
 
