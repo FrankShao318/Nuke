@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # shuffleShortcuts.py
 # Version: 0.2.0
-# Last Updated: Apr. 10, 2020
+# Last Updated: Apr. 11, 2020
 #----------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
@@ -72,6 +72,26 @@ def shuffleRGBchannel():
     blueShuffle.setInput(0, selectedNode)
     blueShuffle['xpos'].setValue(selectedNode_xPos + 150)
     blueShuffle['ypos'].setValue(selectedNode_yPos + 150)
+
+    # Lesson 04 Challenge. Create a merge node, connect B to green shuffle, A to red and blue shuffle.
+    redShuffle.setSelected(True)
+    greenShuffle.setSelected(True)
+    blueShuffle.setSelected(True)
+
+    g_pos_x = greenShuffle['xpos'].value()
+    g_pos_y = greenShuffle['ypos'].value()
+
+
+    myMerge = nuke.createNode('Merge2')
+    myMerge.setInput(1, redShuffle)
+    myMerge.setInput(0, greenShuffle)
+    myMerge.setInput(3, blueShuffle)
+    myMerge['xpos'].setValue(g_pos_x)
+    myMerge['ypos'].setValue(g_pos_y + 150)
+
+    myMerge['operation'].setValue('max')
+
+
 
 
 
