@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # menu.py
-# Version: 1.0.3
-# Last Updated: Apr. 05, 2020
+# Version: 1.0.4
+# Last Updated: Apr. 10, 2020
 #----------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
@@ -11,6 +11,7 @@
 import nuke
 import platform
 import nukescripts
+
 
 # Define where .nuke directory is on each OS's network.
 
@@ -31,6 +32,40 @@ else:
 
 
 
+#----------------------------------------------------------------------------
+# Custom Menus ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+#----------------------------------------------------------------------------
+
+frankMenu = nuke.menu("Nuke").addMenu("FrankMenu")
+frankMenu.addCommand("Autocrop", "nukescripts.autocrop()")
+
+
+frankGizmosMenu = nuke.menu("Nodes").addMenu("FrankGizmos", icon = "frankGizmos.png")
+frankGizmosMenu.addCommand("Autocrop", "nukescripts.autocrop()")
+
+frankGizmosMenu.addCommand("bm_CameraShake", "nuke.createNode('bm_CameraShake')")
+
+
+#----------------------------------------------------------------------------
+toolbar = nuke.menu("Nodes")
+toolbar.addMenu('FrankTool', icon = 'frankTest.png')
+toolbar.addCommand("FrankTool/GradeTool", "nuke.createNode('GradeTool')")
+
+
+#----------------------------------------------------------------------------
+# Python Script :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+#----------------------------------------------------------------------------
+
+import shuffleShortcuts
+
+
+#----------------------------------------------------------------------------
+# Keyboard Shortcuts ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+#----------------------------------------------------------------------------
+
+nuke.menu("Nodes").addCommand("Transform/Tracker", "nuke.createNode('Tracker4')", "ctrl+alt+t", icon = "Tracker.png", shortcutContext = 2)
+
+
 
 #----------------------------------------------------------------------------
 # Knob Defaults :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -48,53 +83,7 @@ nuke.addOnUserCreate(lambda:nuke.thisNode()["first_frame"].setValue(nuke.frame()
 #----------------------------------------------------------------------------
 
 mergeMenu = nuke.menu("Nodes").findItem("Merge/Merges")
-mergeMenu.addCommand("Stencil", "nuke.createNode('Merge2', 'operation stencil bbox B')", "alt+o", icon = "Out.png", shortcutContext = 2)
-mergeMenu.addCommand('Mask', 'nuke.createNode("Merge2", "operation mask bbox B")', 'alt+m', icon = 'Out.png', shortcutContext = 2)
-mergeMenu.addCommand('Plus', 'nuke.createNode("Merge2", "operation plus bbox B")', 'alt+p', icon = 'Out.png', shortcutContext = 2) 
-mergeMenu.addCommand('From', 'nuke.createNode("Merge2", "operation from bbox B")', 'alt+f', icon = 'Out.png', shortcutContext = 2)
-
-
-
-
-
-
-
-
-
-#----------------------------------------------------------------------------
-# Custom Menus ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-#----------------------------------------------------------------------------
-
-frankMenu = nuke.menu("Nuke").addMenu("FrankMenu")
-frankMenu.addCommand("Autocrop", "nukescripts.autocrop()")
-
-
-frankGizmosMenu = nuke.menu("Nodes").addMenu("FrankGizmos", icon = "frankGizmos.png")
-frankGizmosMenu.addCommand("Autocrop", "nukescripts.autocrop()")
-
-frankGizmosMenu.addCommand("bm_CameraShake", "nuke.createNode('bm_CameraShake')")
-
-
-#----------------------------------------------------------------------------
-toolbar = nuke.menu("Nodes")
-toolbar.addCommand("FrankTool/GradeTool", "nuke.createNode('GradeTool')")
-
-
-
-#----------------------------------------------------------------------------
-# Keyboard Shortcuts ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-#----------------------------------------------------------------------------
-
-nuke.menu("Nodes").addCommand("Transform/Tracker", "nuke.createNode('Tracker4')", "ctrl+alt+t", icon = "Tracker.png", shortcutContext = 2)
-
-
-
-
-
-
-
-
-
-
-
-
+mergeMenu.addCommand("Stencil", "nuke.createNode('Merge2', 'operation stencil bbox B')", "alt+o", icon = "frankTest.png", shortcutContext = 2)
+mergeMenu.addCommand('Mask', 'nuke.createNode("Merge2", "operation mask bbox B")', 'alt+m', icon = 'frankTest.png', shortcutContext = 2)
+mergeMenu.addCommand('Plus', 'nuke.createNode("Merge2", "operation plus bbox B")', 'alt+p', icon = 'frankTest.png', shortcutContext = 2) 
+mergeMenu.addCommand('From', 'nuke.createNode("Merge2", "operation from bbox B")', 'alt+f', icon = 'frankTest.png', shortcutContext = 2)
